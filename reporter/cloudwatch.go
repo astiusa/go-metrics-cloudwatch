@@ -49,7 +49,9 @@ func putMetrics(cfg *config.Config, data []*cloudwatch.MetricDatum) {
 	if err != nil {
 		log.Printf("component=cloudwatch-reporter fn=emitMetrics at=error error=%s", err)
 	} else {
-		log.Printf("component=cloudwatch-reporter fn=emitMetrics at=put-metrics count=%d", len(req.MetricData))
+		if cfg.Debug {
+			log.Printf("component=cloudwatch-reporter fn=emitMetrics at=put-metrics count=%d", len(req.MetricData))
+		}
 	}
 }
 
@@ -97,9 +99,13 @@ func metricsData(registry metrics.Registry, cfg *config.Config) []*cloudwatch.Me
 			if h.Count() == 0 {
 				return
 			}
-			log.Printf("%+v", h)
-			for _, p := range cfg.Filter.Percentiles(name) {
+			if cfg.Debug {
 				log.Printf("%+v", h)
+			}
+			for _, p := range cfg.Filter.Percentiles(name) {
+				if cfg.Debug {
+					log.Printf("%+v", h)
+				}
 				datum := aDatum(fmt.Sprintf("%s-perc%.3f", name, p))
 				datum.Value = aws.Float64(h.Percentile(p))
 				data = append(data, datum)

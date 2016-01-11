@@ -26,6 +26,7 @@ func TestCloudwatchReporter(t *testing.T) {
 	cfg := &config.Config{
 		Client: mock,
 		Filter: &config.NoFilter{},
+		Debug: true,
 	}
 	registry := metrics.NewRegistry()
 	for i := 0; i < 30; i++ {
