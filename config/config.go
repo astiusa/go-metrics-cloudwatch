@@ -27,7 +27,7 @@ type Config struct {
 	Namespace             string
 	StaticDimensions      map[string]string
 	ResetCountersOnReport bool
-	Debug									bool
+	Debug                 bool
 }
 
 type Filter interface {

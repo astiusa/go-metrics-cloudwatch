@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/rcrowley/go-metrics"
-	"github.com/sclasen/go-metrics-cloudwatch/config"
+	"github.com/astiusa/go-metrics-cloudwatch/config"
 )
 
 //blocks, run as go reporter.Cloudwatch(cfg)
@@ -69,7 +69,7 @@ func metricsData(registry metrics.Registry, cfg *config.Config) []*cloudwatch.Me
 	//rough port from the graphite reporter
 	registry.Each(func(name string, i interface{}) {
 
-		if !cfg.Filter.ShouldReport(name) {
+		if !cfg.Filter.ShouldReport(name, cfg) {
 			return
 		}
 

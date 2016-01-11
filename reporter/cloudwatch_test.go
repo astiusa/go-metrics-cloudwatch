@@ -7,7 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/rcrowley/go-metrics"
-	"github.com/sclasen/go-metrics-cloudwatch/config"
+	"github.com/astiusa/go-metrics-cloudwatch/config"
 )
 
 type MockPutMetricsClient struct {
@@ -26,7 +26,7 @@ func TestCloudwatchReporter(t *testing.T) {
 	cfg := &config.Config{
 		Client: mock,
 		Filter: &config.NoFilter{},
-		Debug: true,
+		Debug:  true,
 	}
 	registry := metrics.NewRegistry()
 	for i := 0; i < 30; i++ {

@@ -5,8 +5,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/vaughan0/go-ini"
-
 	"github.com/aws/aws-sdk-go/aws/awserr"
 )
 
